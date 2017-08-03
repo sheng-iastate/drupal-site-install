@@ -3,7 +3,11 @@
 
 RUNEXEC=$(printenv RUNEXEC)
 
+DBHOST=$(cat db/hostname)
+DBGRANTUSER=$(cat db/username)
+DBGRANTUSERPW=$(cat db/password)
 
+echo $DBHOST
 
 if [ ! -z "$RUNEXEC" ]
 then
@@ -12,9 +16,6 @@ then
 	PASSWORD=$(env LC_CTYPE=C tr -dc A-Z-a-z-0-9 < /dev/urandom | head -c16)
 	
 	SITE=$(printenv SITE)
-	DBHOST=$(printenv DBHOST)
-	DBGRANTUSER=$(printenv DBGRANTUSER)
-	DBGRANTUSERPW=$(printenv DBGRANTUSERPW)
 
 	echo "Installing $SITE"
 	
