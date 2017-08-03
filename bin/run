@@ -22,8 +22,7 @@ then
 	DRUPALADMINPASSWORD=$(printenv DRUPALADMINPASSWORD)
 
 	cd /opt/app-root/src/web
-	drush site-install iastate8 --db-url=mysql://$SITE:$PASSWORD@$DBHOST/$SITE --db-su=$DBGRANTUSER --db-su-pw=$DBGRANTUSERPW --sites-subdir=$SITE.cloud.las.iastate.edu
---account-pass=$DRUPALADMINPASSWORD --site-name=$SITE -y
+	drush site-install iastate8 --db-url=mysql://$SITE:$PASSWORD@$DBHOST/$SITE --db-su=$DBGRANTUSER --db-su-pw=$DBGRANTUSERPW --sites-subdir=$SITE.cloud.las.iastate.edu --account-pass=$DRUPALADMINPASSWORD --site-name=$SITE -y
 fi
 
 
