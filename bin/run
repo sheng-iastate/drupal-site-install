@@ -7,7 +7,7 @@ DBGRANTUSER=$(cat db/username)
 DBGRANTUSERPW=$(cat db/password)
 
 SITE=$(printenv SITE)
-echo "SITE = $SITE"
+echo "SITE = '$SITE'"
 
 RUNEXEC=$(printenv RUNEXEC)
 
@@ -17,7 +17,7 @@ then
 
 	PASSWORD=$(env LC_CTYPE=C tr -dc A-Z-a-z-0-9 < /dev/urandom | head -c16)
 	
-	echo "Installing $SITE"
+	echo "Installing '$SITE'"
 
 	cd /opt/app-root/src/web
 	drush site-install iastate8 --db-url=mysql://$SITE:$PASSWORD@$DBHOST/$SITE --db-su=$DBGRANTUSER --db-su-pw=$DBGRANTUSERPW --sites-subdir=$SITE.cloud.las.iastate.edu --site-name=$SITE -y
@@ -26,7 +26,7 @@ fi
 
 #keep the pod running if the variable is set.
 KEEPRUNNING=$(printenv KEEPRUNNING)
-echo "KEEPRUNNING = $KEEPRUNNING"
+echo "KEEPRUNNING = '$KEEPRUNNING'"
 if [ ! -z "$KEEPRUNNING" ]
 then
 	while true
