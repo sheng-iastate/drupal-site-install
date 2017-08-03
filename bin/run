@@ -1,4 +1,32 @@
 #!/usr/bin/env bash
 
 
-sleep 6000
+RUNEXEC=$(printenv RUNEXEC)
+
+
+
+if [ ! -z "$RUNEXEC" ]
+then
+
+
+	PASSWORD=$(env LC_CTYPE=C tr -dc A-Z-a-z-0-9 < /dev/urandom | head -c16)
+	
+	SITE=$(printenv SITE)
+	DBHOST=$(printenv DBHOST)
+	DBGRANTUSER=$(printenv DBGRANTUSER)
+	DBGRANTUSERPW=$(printenv DBGRANTUSERPW)
+
+	echo "Installing $SITE"
+	
+
+	cd /opt/app-root/src/web
+	drush site-install iastate8 --db-url=mysql://$SITE:$PASSWORD@$DBHOST/$SITE --db-su=$DBGRANTUSER --db-su-pw=$DBGRANTUSERPW --sites-subdir=$SITE.cloud.las.iastate.edu --site-name=$SITE -y
+
+
+fi
+
+while true
+do
+	echo "Sleep 10 Min"
+	sleep 600
+done
